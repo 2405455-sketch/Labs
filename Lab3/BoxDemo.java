@@ -1,5 +1,5 @@
 package Lab3;
-//Q2
+//Question 2
 import java.util.Scanner;
 
 class Plate{
@@ -13,10 +13,8 @@ class Plate{
         System.out.println("Width: " +width);
     }
 }
-
 class Box extends Plate{
     int height;
-
     Box(int l,int w,int h){
         super(l,w);
         height=h;
@@ -24,25 +22,20 @@ class Box extends Plate{
         System.out.println("Height: " +height);
     }
 }
-
 class WoodBox extends Box{
-    int thick;
-
+    int thickness;
     WoodBox(int l,int w,int h,int t){
         super(l,w,h);
-        thick=t;
+        thickness=t;
         System.out.println("WoodBox Constructor Called");
-        System.out.println("Thickness: "+thick);
+        System.out.println("Thickness: "+thickness);
     }
 }
-
 public class BoxDemo {
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
         System.out.print("Enter length: ");
         int l= sc.nextInt();
-
         System.out.print("Enter width: ");
         int w=sc.nextInt();
 
@@ -51,7 +44,6 @@ public class BoxDemo {
 
         System.out.print("Enter thickness: ");
         int t=sc.nextInt();
-
         WoodBox wb = new WoodBox(l,w,h,t);
     }
 }
