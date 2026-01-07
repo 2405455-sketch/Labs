@@ -41,7 +41,7 @@ class Person extends Account{
     }
 }
 
-public class AccDemo{
+public class AccountDemo{
 
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
