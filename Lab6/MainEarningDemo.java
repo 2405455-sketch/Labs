@@ -6,7 +6,7 @@ public class MainEarningDemo {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter employee id and name: ");
+        System.out.print("Enter the employee id and employee name: ");
         int id = sc.nextInt();
         String name = sc.next();
 
@@ -14,9 +14,10 @@ public class MainEarningDemo {
         double basic = sc.nextDouble();
 
         Sales s = new Sales(id, name, basic);
-        double total = s.earnings() + s.allowance();
+
+        double totalEarning = s.earnings(); // DO NOT add travelling allowance
 
         System.out.println("The emp id of the employee is " + id);
-        System.out.println("The total earning is " + total);
+        System.out.println("The total earning is " + totalEarning);
     }
 }
