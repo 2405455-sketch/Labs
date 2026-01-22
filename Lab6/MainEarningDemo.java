@@ -15,7 +15,7 @@ public class MainEarningDemo {
 
         Sales s = new Sales(id, name, basic);
 
-        double totalEarning = s.earnings(); // DO NOT add travelling allowance
+        double totalEarning = s.earnings();
 
         System.out.println("The emp id of the employee is " + id);
         System.out.println("The total earning is " + totalEarning);
