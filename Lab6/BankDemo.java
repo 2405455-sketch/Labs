@@ -16,3 +16,4 @@ public class BankDemo {
         // Bank.InterestCalculator cannot access non-static member 'rate' directly
     }
 }
+

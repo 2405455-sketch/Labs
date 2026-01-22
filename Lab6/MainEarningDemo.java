@@ -21,3 +21,4 @@ public class MainEarningDemo {
         System.out.println("The total earning is " + totalEarning);
     }
 }
+
