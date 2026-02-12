@@ -9,6 +9,7 @@ public class StringExample {
         StringExample obj = new StringExample();
         Scanner sc = new Scanner(System.in);
 
+
         System.out.print("Enter a String : ");
         obj.str = sc.nextLine();   // user-entered string
 
