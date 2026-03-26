@@ -11,7 +11,7 @@ public class StringExample {
 
 
         System.out.print("Enter a String : ");
-        obj.str = sc.nextLine();   // user-entered string
+        obj.str = sc.nextLine();
 
         System.out.println("\n1. Change Case");
         System.out.println("2. Reverse String (without function)");
@@ -25,7 +25,7 @@ public class StringExample {
 
         System.out.print("\nEnter your choice : ");
         int choice = sc.nextInt();
-        sc.nextLine();   // consume leftover newline
+        sc.nextLine();
 
         switch (choice) {
 
