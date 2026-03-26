@@ -1,140 +1,163 @@
+package Lab8;
+
 import java.util.Scanner;
 
 public class StringExample {
-
-    String str;
+    static String result = "";
+    static Boolean err = true;
 
     public static void main(String[] args) {
 
-        StringExample obj = new StringExample();
+        // 1st way
+        String name = "Rama";
+
+        // 2nd way
+        String newname = new String("Gopal");
+
+        // 3rd way
+        char[] st = { 'a', 'b', 'c' };
+        String str = new String(st);
+
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("Pick Option\n" +
+                "1) Change the case of the string\n" +
+                "2) Reverse the string \n" +
+                "3) Compare two strings\n" +
+                "4) Insert one string into another string\n" +
+                "5) Convert the string to upper case and lower case\n" +
+                "6) Check whether the character is present in the string and at which position\n" +
+                "7) Check whether the string is palindrome or not.\n" +
+                "8) Check the number of word, vowel and consonant in the string");
 
-        System.out.print("Enter a String : ");
-        obj.str = sc.nextLine();
+        int i = sc.nextInt();
+        sc.nextLine();   // ✅ FIX: consume leftover newline
 
-        System.out.println("\n1. Change Case");
-        System.out.println("2. Reverse String (without function)");
-        System.out.println("3. Reverse String (using pre-defined function)");
-        System.out.println("4. Compare two strings");
-        System.out.println("5. Insert one string into another");
-        System.out.println("6. Convert to Uppercase and Lowercase");
-        System.out.println("7. Check character position");
-        System.out.println("8. Check palindrome");
-        System.out.println("9. Count words, vowels, consonants");
+        System.out.println("Enter String:");
+        String s = sc.nextLine();
 
-        System.out.print("\nEnter your choice : ");
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        switch (choice) {
-
+        switch (i) {
             case 1:
-                obj.changeCase();
+                changeCase(s);
                 break;
-
             case 2:
-                obj.reverseString(obj.str);
+                revYesFun(s);
                 break;
-
             case 3:
-                System.out.println(obj.revStr(obj.str));
-                break;
-
-            case 4:
-                System.out.print("Enter second string for comparision : ");
+                System.out.println("Enter next String:");
                 String s2 = sc.nextLine();
-                int diff = Math.abs(obj.str.compareTo(s2));
-                System.out.println("The difference between ASCII value is " + diff);
+                compareString(s, s2);
                 break;
-
+            case 4:
+                System.out.println("Enter next String:");
+                String s3 = sc.nextLine();
+                joinString(s, s3);
+                break;
             case 5:
-                System.out.print("Enter the string to be inserted into first string : ");
-                String insert = sc.nextLine();
-                System.out.println("The string after insertion is : " + obj.str + " " + insert);
+                convertCase(s);
                 break;
-
             case 6:
-                System.out.println("Uppercase: " + obj.str.toUpperCase());
-                System.out.println("Lowercase: " + obj.str.toLowerCase());
-                break;
-
-            case 7:
-                System.out.print("Enter a character : ");
+                System.out.println("Enter character:");
                 char ch = sc.next().charAt(0);
-                int pos = obj.str.indexOf(ch);
-                if (pos != -1)
-                    System.out.println("Position of entered character: " + pos);
-                else
-                    System.out.println("Entered character is not present");
+                checkCharacter(s, ch);
                 break;
-
+            case 7:
+                checkPalindrome(s);
+                break;
             case 8:
-                String rev = obj.revStr(obj.str);
-                if (obj.str.equals(rev))
-                    System.out.println("Entered string is palindrome");
-                else
-                    System.out.println("Entered string is not a palindrome");
+                countAll(s);
                 break;
-
-            case 9:
-                int vowels = 0, consonants = 0, words = 0;
-                String s = obj.str.toLowerCase();
-
-                String[] w = s.trim().split("\\s+");
-                words = w.length;
-
-                for (int i = 0; i < s.length(); i++) {
-                    char c = s.charAt(i);
-                    if (c >= 'a' && c <= 'z') {
-                        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-                            vowels++;
-                        else
-                            consonants++;
-                    }
-                }
-
-                System.out.println("No. of words: " + words);
-                System.out.println("No. of vowels: " + vowels);
-                System.out.println("No. of consonants: " + consonants);
-                break;
-
             default:
-                System.out.println("Invalid choice");
+                System.out.println("Invalid Choice");
+                err = false;
+                break;
         }
+
+        if (!result.equals(""))
+            System.out.println("Result: " + result);
     }
 
-    String changeCase() {
-        String result = "";
-        // null looks bad
-
+    // i) Change case
+    static void changeCase(String str) {
         result = str.toUpperCase();
-        System.out.println("The changed string is:" + result);
-        return result;
     }
 
-    String reverseString(String str) {
-        String result = "";
-        int start = 0, end = str.length(), destoffset = 0;
-        // initialised destoffset and removed unsafe indexese
-
-        char buf[] = new char[end - start];
-        str.getChars(start, end, buf, destoffset);
-        System.out.println(buf);
-
-        for (int i = buf.length - 1; i >= 0; i--) {
-            // originally i == 0, loop wont start
-            result += buf[i];
+    // ii a) Reverse without predefined function
+    static void revNoFun(String str) {
+        result = "";
+        for (int i = str.length() - 1; i >= 0; i--) {
+            result += str.charAt(i);
         }
-
-        System.out.println("The string after reversing is " + result);
-        return result;
     }
 
-    String revStr(String str) {
-        String result = "";
+    // ii b) Reverse using predefined function
+    static void revYesFun(String str) {
         StringBuffer sb = new StringBuffer(str);
         result = sb.reverse().toString();
-        return result;
+    }
+
+    // iii) Compare strings
+    static void compareString(String str1, String str2) {
+        int res = str2.compareTo(str1);
+        System.out.println("The difference between ASCII value is: " + res);
+    }
+
+    // iv) Insert string
+    static void joinString(String s1, String s2) {
+        String res = s1 + " " + s2;
+        System.out.println("The string after insertion is: " + res);
+    }
+
+    // v) Convert upper & lower case
+    static void convertCase(String str) {
+        System.out.println("Uppercase: " + str.toUpperCase());
+        System.out.println("Lowercase: " + str.toLowerCase());
+    }
+
+    // vi) Character position
+    static void checkCharacter(String str, char ch) {
+        int pos = str.indexOf(ch);
+        if (pos >= 0)
+            System.out.println("Position of entered character: " + pos);
+        else
+            System.out.println("Entered character is not present");
+    }
+
+    // vii) Palindrome
+    static void checkPalindrome(String str) {
+        String rev = "";
+        for (int i = str.length() - 1; i >= 0; i--) {
+            rev += str.charAt(i);
+        }
+
+        if (str.equalsIgnoreCase(rev))
+            System.out.println("Entered string is palindrome");
+        else
+            System.out.println("Entered string is not a palindrome");
+    }
+
+    // viii) Count words, vowels, consonants
+    static void countAll(String str) {
+        int words = 0, vowels = 0, consonants = 0;
+
+        String s = str.trim();
+
+        if (!s.isEmpty())
+            words = s.split("\\s+").length;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = Character.toLowerCase(s.charAt(i));
+
+            if (Character.isLetter(ch)) {
+                if ("aeiou".indexOf(ch) != -1)
+                    vowels++;
+                else
+                    consonants++;
+            }
+        }
+
+        System.out.println("No. of words: " + words);
+        System.out.println("No. of vowels: " + vowels);
+        System.out.println("No. of consonants: " + consonants);
     }
 }
